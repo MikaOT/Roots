@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Roots | Raíces Musicales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
+        
+        :root {
+            --color-earth: #121212;
+            --color-accent: #D97706; 
+            --color-paper: #F5F5F4;
+            --color-gold: #C5A059;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--color-earth); 
+            color: var(--color-paper);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
+
+        .bg-grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Cfilter id='noiseFilter'%3%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3%3C/filter%3%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3%3C/svg%3%3E");
+            opacity: 0.04;
+            pointer-events: none;
+        }
+
+        .card-archive {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-archive:hover {
+            border-color: var(--color-gold);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-8px);
+        }
+
+        .nav-scrolled {
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        /* Botón de Redes Sociales Animado */
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            color: var(--color-gold);
+            transform: scale(1.1);
+        }
+
+        input[type=range] {
+            accent-color: var(--color-accent);
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <!-- Chosen Palette: Cultural Earth (Ebony, Ocre, Gold) -->
+    <!-- Application Structure Plan: 
+         1. Header & Social Hub: Quick links to profiles.
+         2. Hero: Brand identity.
+         3. Narrative: Primary media (Video/Audio).
+         4. Radar ADN: Interactive data.
+         5. Transmedia Expansion: 8 specific post links.
+         6. Participation: UGC mechanic.
+         7. Transparency: Academic footer.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+    <div class="fixed inset-0 bg-grain z-50"></div>
+
+    <!-- Navegación -->
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="text-2xl font-bold tracking-tighter serif italic">
+                <span class="text-amber-600">◈</span> Roots <!-- Latidos Musicales -->
+            </div>
+            
+            <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-semibold text-stone-400 items-center">
+                <a href="#inicio" class="hover:text-amber-500 transition">Inicio</a>
+                <a href="#narrativa" class="hover:text-amber-500 transition">Archivo</a>
+                <a href="#interactivo" class="hover:text-amber-500 transition">ADN</a>
+                <a href="#transmedia" class="hover:text-amber-500 transition">Redes</a>
+                
+                <!-- Conexión Directa -->
+                <div class="h-4 w-px bg-stone-800 mx-2"></div>
+                <div class="flex gap-4">
+                    <a href="#" title="Instagram" class="social-btn">IG</a>
+                    <a href="#" title="TikTok" class="social-btn">TK</a>
+                    <a href="#" title="X (Twitter)" class="social-btn">X</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-stone-900/40 to-stone-950"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-4xl text-center">
+            <h1 class="text-6xl md:text-9xl font-bold mb-8 leading-none serif">
+                La Raíz <br>
+                <span class="italic text-amber-600">del Sonido</span>
+            </h1>
+            <p class="text-lg md:text-xl text-stone-400 font-light max-w-2xl mx-auto mb-12 leading-relaxed">
+                Una investigación transmedia sobre los latidos que unen al mundo. 
+                Descubre la historia más allá de la web.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#narrativa" class="px-10 py-4 bg-amber-600 text-stone-950 rounded-full font-bold hover:bg-amber-500 transition shadow-xl shadow-amber-900/20 uppercase text-xs tracking-widest">
+                    Iniciar Viaje
+                </a>
+                <a href="#transmedia" class="px-10 py-4 border border-stone-700 rounded-full font-bold hover:bg-stone-800 transition uppercase text-xs tracking-widest">
+                    Ver Expansión
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección Audiovisual (Video + Podcast) -->
+    <section id="narrativa" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-20">
+                <span class="text-amber-600 font-mono text-[10px] tracking-widest uppercase mb-2 block">Vol. 1 / Piezas Madre</span>
+                <h2 class="text-5xl font-bold serif">Documental & Podcast</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                <!-- Video Placeholder -->
+                <div class="card-archive p-4 rounded-3xl group">
+                    <div class="aspect-video bg-stone-900 rounded-2xl overflow-hidden relative border border-stone-800">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition duration-700" alt="Instrumento">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <button class="w-16 h-16 bg-amber-600 rounded-full text-stone-950 flex items-center justify-center text-xl transition group-hover:scale-110">▶</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">01. Video 1</h3>
+                        <p class="text-stone-500 text-sm">Video documental (180s) sobre la herencia africana en la música caribeña.</p>
+                    </div>
+                </div>
+
+                 <div class="card-archive p-4 rounded-3xl group">
+                    <div class="aspect-video bg-stone-900 rounded-2xl overflow-hidden relative border border-stone-800">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition duration-700" alt="Instrumento">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <button class="w-16 h-16 bg-amber-600 rounded-full text-stone-950 flex items-center justify-center text-xl transition group-hover:scale-110">▶</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">02. Video 2</h3>
+                        <p class="text-stone-500 text-sm">Video documental (180s) sobre la herencia africana en la música caribeña.</p>
+                    </div>
+                </div>
+
+                <!-- Podcast Component -->
+                <div class="card-archive p-8 rounded-3xl flex flex-col justify-center border-amber-900/30">
+                    <div class="flex items-center gap-6 mb-8">
+                        <div class="w-16 h-16 bg-amber-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg">🎙️</div>
+                        <div>
+                            <h3 class="text-2xl font-bold serif leading-none">Ecos de la Selva</h3>
+                            <p class="text-amber-500 font-mono text-[10px] mt-2 uppercase tracking-widest">Podcast / 05:45 MIN</p>
+                        </div>
+                    </div>
+                    
+                    <audio id="podcast-audio" preload="metadata">
+                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    </audio>
+
+                    <div class="bg-black/30 p-6 rounded-2xl">
+                        <div class="flex items-center gap-4 mb-4">
+                            <button id="play-pause" class="w-10 h-10 bg-white text-stone-950 rounded-full flex items-center justify-center text-xs">▶</button>
+                            <input type="range" id="seek-slider" class="flex-1 h-1 bg-stone-800 rounded-full appearance-none" value="0">
+                        </div>
+                        <div class="flex justify-between text-[10px] font-mono text-stone-500">
+                            <span id="current-time">00:00</span>
+                            <span id="duration">--:--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atlas Interactivo -->
+    <section id="interactivo" class="py-32 bg-stone-900/50 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold serif mb-6">ADN de la Raíz</h2>
+                    <p class="text-stone-400 mb-8 leading-relaxed italic">Compara visualmente cómo se distribuyen los elementos musicales en cada región. Haz clic en los botones para actualizar el mapa genético.</p>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="updateRadar('brasil')" id="btn-brasil" class="px-6 py-3 bg-amber-600 text-stone-950 rounded-xl text-xs font-bold transition-all uppercase tracking-widest">Brasil</button>
+                        <button onclick="updateRadar('espana')" id="btn-espana" class="px-6 py-3 bg-stone-800 text-stone-400 rounded-xl text-xs font-bold transition-all hover:text-white uppercase tracking-widest">España</button>
+                    </div>
+                </div>
+                <div class="card-archive p-8 rounded-[2rem] aspect-square flex items-center justify-center">
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPANSIÓN TRANSMEDIA: 8 Piezas con Enlaces Reales -->
+    <section id="transmedia" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <span class="text-amber-500 font-mono text-xs uppercase tracking-[0.4em] block mb-4">Ecos del Relato</span>
+                <h2 class="text-5xl font-bold serif">Universo Expandido</h2>
+                <p class="text-stone-500 mt-4">8 piezas diseñadas para completar la historia en otras plataformas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Pieza 1: Reel -->
+                <a href="https://instagram.com/tu_perfil" target="_blank" class="card-archive p-6 rounded-2xl group relative overflow-hidden">
+                    <div class="absolute top-4 right-4 text-xs font-bold text-amber-500 opacity-30">IG</div>
+                    <div class="mb-4 text-stone-700 group-hover:text-amber-500 transition-colors">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">01. El Luthier</h4>
+                    <p class="text-xs text-stone-500 mb-6 leading-relaxed">Video corto mostrando el proceso artesanal de fabricación.</p>
+                    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest group-hover:underline">Ver Pieza →</span>
+                </a>
+
+                <!-- Pieza 2: TikTok -->
+                <a href="https://tiktok.com/@tu_perfil" target="_blank" class="card-archive p-6 rounded-2xl group relative overflow-hidden">
+                    <div class="absolute top-4 right-4 text-xs font-bold text-stone-600 opacity-30">TK</div>
+                    <div class="mb-4 text-stone-700 group-hover:text-amber-500 transition-colors">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/><path d="M15 8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/><path d="M15 2v6"/><path d="M9 2v10"/></svg>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">02. Reto Rítmico</h4>
+                    <p class="text-xs text-stone-500 mb-6 leading-relaxed">Mecánica de participación UGC: #LatidoChallenge.</p>
+                    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest group-hover:underline">Ver Pieza →</span>
+                </a>
+
+                <!-- Repetir lógica para las 8 piezas -->
+                <a href="#" class="card-archive p-6 rounded-2xl group opacity-60">
+                    <div class="mb-4 text-stone-700 group-hover:text-amber-500 transition-colors">📸</div>
+                    <h4 class="font-bold text-lg mb-2">03. Galería de Campo</h4>
+                    <p class="text-xs text-stone-500 mb-6">Serie de 10 fotos etnográficas.</p>
+                    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Enlace IG →</span>
+                </a>
+
+                <a href="#" class="card-archive p-6 rounded-2xl group opacity-60">
+                    <div class="mb-4 text-stone-700 group-hover:text-amber-500 transition-colors">🎥</div>
+                    <h4 class="font-bold text-lg mb-2">04. Making Of</h4>
+                    <p class="text-xs text-stone-500 mb-6">Detrás de las cámaras de la web.</p>
+                    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Enlace TK →</span>
+                </a>
+
+                <!-- Fila inferior -->
+                <a href="#" class="card-archive p-6 rounded-2xl group opacity-40">
+                    <div class="mb-4 text-stone-700">🧵</div>
+                    <h4 class="font-bold text-lg mb-2">05. Hilo Teórico</h4>
+                    <p class="text-xs text-stone-500 mb-6">Análisis profundo en X (Twitter).</p>
+                    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Ver Hilo →</span>
+                </a>
+                <a href="#" class="card-archive p-6 rounded-2xl group opacity-40">
+                    <div class="mb-4 text-stone-700">🖼️</div>
+                    <h4 class="font-bold text-lg mb-2">06. Infografía Estática</h4>
+                    <p class="text-xs text-stone-500 mb-6">Mapa de influencias migratorias.</p>
+                    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Ver en IG →</span>
+                </a>
+                <a href="#" class="card-archive p-6 rounded-2xl group opacity-40">
+                    <div class="mb-4 text-stone-700">🎙️</div>
+                    <h4 class="font-bold text-lg mb-2">07. Cápsula de Audio</h4>
+                    <p class="text-xs text-stone-500 mb-6">Entrevista rápida a un experto.</p>
+                    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Escuchar →</span>
+                </a>
+                <a href="#" class="card-archive p-6 rounded-2xl group opacity-40">
+                    <div class="mb-4 text-stone-700">💫</div>
+                    <h4 class="font-bold text-lg mb-2">08. Story Interactiva</h4>
+                    <p class="text-xs text-stone-500 mb-6">Encuesta sobre preferencias musicales.</p>
+                    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Ver en IG →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Participación / Reto -->
+    <section id="participa" class="py-32 bg-amber-600 text-stone-950 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-5xl font-bold serif mb-8">Únete a la Orquesta Mundial</h2>
+            <p class="text-lg font-medium mb-12">Mecánica: Graba un sonido cotidiano de tu país y súbelo a Instagram con el hashtag <strong class="underline">#MiRaizMusical</strong>. Crearemos una pieza colectiva con todos los sonidos recibidos.</p>
+            <a href="#" class="px-12 py-5 bg-stone-950 text-white rounded-full font-bold uppercase text-xs tracking-[0.2em] hover:bg-stone-800 transition">Participar ahora</a>
+        </div>
+    </section>
+
+    <!-- Transparencia & Memoria -->
+    <section id="memoria" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold serif mb-10 border-l-8 border-amber-600 pl-8">Memoria de Transparencia</h2>
+            
+            <div class="grid md:grid-cols-2 gap-16 text-sm text-stone-500">
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="text-stone-300 font-bold mb-2 uppercase text-[10px] tracking-widest">Ficción vs Realidad</h4>
+                        <p>Las entrevistas del video 01 son testimonios reales. Los datos del Atlas son estadísticos. La narrativa global es una construcción creativa.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-stone-300 font-bold mb-2 uppercase text-[10px] tracking-widest">Uso de IA</h4>
+                        <p>Se utilizó IA para el escalado de imágenes antiguas y la limpieza de audio en grabaciones de campo del podcast.</p>
+                    </div>
+                </div>
+                <div class="p-8 bg-stone-900 rounded-3xl border border-stone-800 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-stone-300 font-bold mb-4 uppercase text-[10px] tracking-widest">Fuentes</h4>
+                        <ul class="space-y-2 font-mono text-[10px]">
+                            <li>• UNESCO Intangible Heritage</li>
+                            <li>• Global Music Archive</li>
+                        </ul>
+                    </div>
+                    <button class="mt-8 w-full py-4 border border-stone-700 rounded-xl hover:bg-stone-800 transition font-bold uppercase tracking-widest text-[10px]">Descargar Memoria (PDF)</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Social Hub -->
+    <footer class="py-20 border-t border-stone-900 bg-stone-950 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="text-center md:text-left">
+                <div class="text-xl font-bold serif mb-2">Roots</div>
+                <p class="text-stone-600 text-xs uppercase tracking-widest">Pieza Madre / Proyecto de Grado 2026</p>
+            </div>
+            
+            <div class="flex gap-8">
+                <a href="#" class="social-btn text-xs font-bold uppercase tracking-widest">Instagram</a>
+                <a href="#" class="social-btn text-xs font-bold uppercase tracking-widest">TikTok</a>
+                <a href="#" class="social-btn text-xs font-bold uppercase tracking-widest">Twitter/X</a>
+                <a href="#" class="social-btn text-xs font-bold uppercase tracking-widest">SoundCloud</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts de Interactividad -->
+    <script>
+        // NAVEGACIÓN
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
+        });
+
+        // REPRODUCTOR DE AUDIO
+        const audio = document.getElementById('podcast-audio');
+        const playBtn = document.getElementById('play-pause');
+        const slider = document.getElementById('seek-slider');
+        const currentTime = document.getElementById('current-time');
+        const durationText = document.getElementById('duration');
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) { audio.play(); playBtn.innerText = '⏸'; }
+            else { audio.pause(); playBtn.innerText = '▶'; }
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            durationText.innerText = formatTime(audio.duration);
+            slider.max = Math.floor(audio.duration);
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            slider.value = Math.floor(audio.currentTime);
+            currentTime.innerText = formatTime(audio.currentTime);
+        });
+
+        slider.addEventListener('input', () => audio.currentTime = slider.value);
+
+        function formatTime(s) {
+            let m = Math.floor(s / 60);
+            let sec = Math.floor(s % 60);
+            return `${m}:${sec < 10 ? '0'+sec : sec}`;
+        }
+
+        // RADAR CHART
+        let radar;
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        const stats = {
+            brasil: [90, 70, 40, 60, 20],
+            espana: [30, 60, 95, 20, 80]
+        };
+
+        function initChart() {
+            radar = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Ritmo', 'Armonía', 'Voz', 'Cuerda', 'Viento'],
+                    datasets: [{
+                        data: stats.brasil,
+                        backgroundColor: 'rgba(217, 119, 6, 0.2)',
+                        borderColor: '#D97706',
+                        pointBackgroundColor: '#D97706',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255,255,255,0.05)' },
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            pointLabels: { color: '#666', font: { size: 10, weight: 'bold' } },
+                            ticks: { display: false },
+                            suggestedMin: 0, suggestedMax: 100
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function updateRadar(c) {
+            radar.data.datasets[0].data = stats[c];
+            radar.update();
+            document.getElementById('btn-brasil').className = c === 'brasil' ? 'px-6 py-3 bg-amber-600 text-stone-950 rounded-xl text-xs font-bold' : 'px-6 py-3 bg-stone-800 text-stone-400 rounded-xl text-xs font-bold';
+            document.getElementById('btn-espana').className = c === 'espana' ? 'px-6 py-3 bg-amber-600 text-stone-950 rounded-xl text-xs font-bold' : 'px-6 py-3 bg-stone-800 text-stone-400 rounded-xl text-xs font-bold';
+        }
+
+        window.onload = initChart;
+    </script>
+</body>
+</html>
