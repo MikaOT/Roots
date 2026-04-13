@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,44 +8,45 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
-        /* Importar nuevas tipografías */
+        /* Importar tipografías */
         @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700&display=swap');
-        
+
         :root {
-            --color-base: #FDF9F3; /* Crema envejecido para el fondo */
-            --color-accent: #A01A1A; /* Rojo intenso de tus imágenes */
-            --color-text: #1A1A1A; /* Texto oscuro */
+            --color-base: #FDF9F3;
+            --color-accent: #A01A1A;
+            --color-text: #1A1A1A;
         }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--color-base); 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-base);
             color: var(--color-text);
             scroll-behavior: smooth;
         }
 
-        /* Tipografía para títulos (estilo impactante) */
-        h1, h2, h3, .font-title { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; }
+        h1, h2, h3, .font-title {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+        }
 
-        /* Efecto de textura de papel o vinilo viejo */
         .bg-texture {
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Cfilter id='noiseFilter'%3%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3%3C/filter%3%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3%3C/svg%3%3E");
             opacity: 0.06;
             pointer-events: none;
         }
 
-        /* Estilos para el elemento del vinilo */
         .vinyl-record {
             width: 24rem;
             height: 24rem;
-            background-image: url('https://images.unsplash.com/photo-1619983081563-430f63602796?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Imagen de disco de vinilo */
+            background-image: url('https://images.unsplash.com/photo-1619983081563-430f63602796?q=80&w=1374&auto=format&fit=crop');
             background-size: cover;
             border-radius: 50%;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border: 4px solid #222;
-            animation: spin 20s linear infinite; /* Animación de rotación */
+            animation: spin 20s linear infinite;
         }
+
         .vinyl-record::after {
             content: '';
             position: absolute;
@@ -55,57 +57,40 @@
             border-radius: 50%;
             border: 3px solid #111;
         }
+
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* Estilos para tarjetas */
         .card-modern {
             background: white;
             border: 2px solid var(--color-base);
             border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
+
         .card-modern:hover {
             border-color: var(--color-accent);
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        /* Estilos para el navegador al hacer scroll */
         .nav-scrolled {
             background: rgba(253, 249, 243, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        /* Estilos para el gráfico interactivo */
-        .chart-container { 
-            position: relative; 
-            width: 100%; 
-            max-width: 550px; 
-            margin: auto; 
-            height: 400px;
-        }
-
-        /* Estilo para el input de rango del audio */
-        input[type=range] {
-            accent-color: var(--color-accent);
-        }
-
-        /* Estilos para las imágenes de la presentación */
-        .presentation-image {
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border: 4px solid white;
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
     </style>
-    <!-- Chosen Palette: Crema Envejecido (#FDF9F3) & Rojo Intenso (#A01A1A) -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
+
 <body class="antialiased">
     <div class="fixed inset-0 bg-texture z-50"></div>
 
-    <!-- Navegación -->
     <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 py-4">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="text-3xl font-bold tracking-tighter font-title flex items-center gap-1">
@@ -121,161 +106,134 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header id="inicio" class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pt-20">
-        <div class="absolute inset-0 z-0 opacity-10 bg-fixed" style="background-image: url('https://images.unsplash.com/photo-1605722558200-b83d02944754?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center;"></div>
-        
+        <div class="absolute inset-0 z-0 opacity-10 bg-fixed" style="background-image: url('https://images.unsplash.com/photo-1605722558200-b83d02944754?q=80&w=1470&auto=format&fit=crop'); background-size: cover; background-position: center;"></div>
         <div class="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div>
-                <h1 class="text-7xl md:text-9xl font-bold mb-6 leading-none font-title text-accent">
-                    ROOTS
-                </h1>
-                <div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-accent relative overflow-hidden">
-                    <h2 class="text-xl font-bold mb-4 uppercase tracking-wider underline text-accent">¿Por qué este nombre?</h2>
-                    <p class="text-sm leading-relaxed font-medium">
-                        Se llama Roots porque la música nace de las raíces culturales de cada país y generación. 
-                        Representa el origen de los géneros, la identidad de cada nación y la conexión entre 
-                        el pasado y el presente.
-                    </p>
+                <h1 class="text-7xl md:text-9xl font-bold mb-6 font-title text-accent">ROOTS</h1>
+                <div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-accent">
+                    <h2 class="text-xl font-bold mb-4 underline text-accent">¿Por qué este nombre?</h2>
+                    <p class="text-sm font-medium">Se llama Roots porque la música nace de las raíces culturales de cada país y generación. Representa el origen de los géneros y la conexión entre pasado y presente.</p>
                 </div>
             </div>
             <div class="relative flex justify-center items-center">
-                <!-- Vinilo Decorativo -->
                 <div class="vinyl-record"></div>
-                <!-- Imagen del chico tocando (simulada) -->
-                <div class="absolute -bottom-12 -right-12 w-64 h-auto presentation-image transform rotate-6 hidden lg:block">
-                    <img src="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Músico tocando" class="w-full h-full object-cover rounded-lg">
-                </div>
             </div>
         </div>
     </header>
 
-    <!-- Sección Concepto -->
     <section id="concepto" class="py-24 bg-white border-y border-stone-200 px-6">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
             <div>
-                <h2 class="text-5xl md:text-7xl font-bold mb-8 leading-none font-title text-accent">
-                    DE QUÉ <br>TRATARÁ
-                </h2>
+                <h2 class="text-5xl md:text-7xl font-bold mb-8 font-title text-accent">DE QUÉ <br>TRATARÁ</h2>
                 <div class="grid sm:grid-cols-2 gap-8">
                     <div>
                         <h4 class="font-bold text-accent uppercase mb-4 border-b-2 border-accent inline-block pb-1">¿Qué hacemos?</h4>
                         <ul class="text-sm space-y-3 font-medium text-stone-600 list-disc list-inside">
                             <li>Conectamos pasado y presente.</li>
-                            <li>Generamos un espacio de tecnología e historia.</li>
-                            <li>Creamos un puente generacional.</li>
+                            <li>Generamos espacio tecnológico.</li>
+                            <li>Puente generacional.</li>
                         </ul>
                     </div>
                     <div>
-                        <h4 class="font-bold text-accent uppercase mb-4 border-b-2 border-accent inline-block pb-1">¿Qué queremos lograr?</h4>
+                        <h4 class="font-bold text-accent uppercase mb-4 border-b-2 border-accent inline-block pb-1">¿Qué queremos?</h4>
                         <ul class="text-sm space-y-3 font-medium text-stone-600 list-disc list-inside">
-                            <li>Mostrar la evolución del consumo.</li>
-                            <li>Resaltar la riqueza cultural.</li>
-                            <li>Conectar culturas a través del sonido.</li>
+                            <li>Evolución del consumo.</li>
+                            <li>Riqueza cultural.</li>
+                            <li>Conexión sonora.</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="relative">
-                <!-- Imagen de los vinilos (simulada) -->
-                <div class="presentation-image transform -rotate-3">
-                    <img src="https://images.unsplash.com/photo-1535990798636-635705856455?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pila de Vinilos" class="w-full h-full object-cover rounded-lg">
-                </div>
+            <div class="presentation-image transform -rotate-3 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1583927109257-f21c74dd0c3f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Colección de Vinilos" class="w-full h-full object-cover">
             </div>
         </div>
     </section>
 
-    <!-- Narrativa: Videos -->
     <section id="narrativa" class="py-24 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="mb-20 text-center">
-                <h2 class="text-4xl font-bold font-title mb-4 text-accent">ARCHIVO SONORO</h2>
-                <div class="w-24 h-1 bg-accent mx-auto"></div>
+    <div class="max-w-6xl mx-auto">
+        <div class="mb-20 text-center">
+            <h2 class="text-4xl font-bold font-title mb-4 text-accent">ARCHIVO SONORO</h2>
+            <div class="w-24 h-1 bg-accent mx-auto"></div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="card-modern p-6">
+                <div class="aspect-video bg-stone-200 rounded-lg mb-4 overflow-hidden border-4 border-white shadow-sm">
+                    <iframe class="w-full h-full" 
+                        src="https://www.youtube.com/embed/ZrAFJgEGwzc" 
+                        title="YouTube video player" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <span class="text-accent font-bold text-[10px] tracking-widest uppercase mb-2 block">VIDEO 01</span>
+                <h3 class="text-xl font-bold mb-2 font-title">Orígenes Musicales</h3>
+                <p class="text-sm text-stone-600">¿Cómo nacio la música?</p>
             </div>
 
-            <div class="grid lg:grid-cols-3 gap-8 mb-16">
-                <!-- Video 1 -->
-                <div class="card-modern p-6">
-                    <div class="aspect-video bg-stone-200 rounded-lg mb-4 relative overflow-hidden group border-4 border-white shadow-sm">
-                        <!-- Sustituir con Iframe de Youtube -->
-                        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Video Origen" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-500">
-                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-transparent transition-all">
-                            <button class="w-16 h-16 bg-accent rounded-full text-white flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition">▶</button>
-                        </div>
-                    </div>
-                    <span class="text-accent font-bold text-[10px] tracking-widest uppercase mb-2 block">VIDEO 01 (180s)</span>
-                    <h3 class="text-xl font-bold mb-2 font-title">Orígenes Culturales</h3>
-                    <p class="text-sm text-stone-600 leading-relaxed">Exploración visual de la raíz de los géneros y su nacimiento.</p>
+            <div class="card-modern p-6">
+                <div class="aspect-video bg-stone-900 rounded-lg mb-4 overflow-hidden border-4 border-white shadow-sm">
+                    <video class="w-full h-full object-cover" controls>
+                        <source src="videos/A1.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
                 </div>
+                <span class="text-accent font-bold text-[10px] tracking-widest uppercase mb-2 block">VIDEO 02</span>
+                <h3 class="text-xl font-bold mb-2 font-title">Cultura Musical</h3>
+                <p class="text-sm text-stone-600">¿Qué representa la música en diferentes culturas?</p>
+            </div>
 
-                <!-- Video 2 -->
-                <div class="card-modern p-6">
-                    <div class="aspect-video bg-stone-200 rounded-lg mb-4 relative overflow-hidden group border-4 border-white shadow-sm">
-                        <!-- Sustituir con Iframe de Youtube -->
-                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Video Evolución" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-500">
-                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-transparent transition-all">
-                            <button class="w-16 h-16 bg-accent rounded-full text-white flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition">▶</button>
-                        </div>
-                    </div>
-                    <span class="text-accent font-bold text-[10px] tracking-widest uppercase mb-2 block">VIDEO 02 (160s)</span>
-                    <h3 class="text-xl font-bold mb-2 font-title">Evolución del Formato</h3>
-                    <p class="text-sm text-stone-600 leading-relaxed">Del vinilo al streaming: cómo ha cambiado nuestra forma de escuchar.</p>
-                </div>
-
-                <!-- Podcast Component -->
-                <div class="card-modern p-6 flex flex-col justify-between bg-accent/5">
+            <div class="card-modern p-6 flex flex-col justify-between bg-accent/5">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center text-white text-2xl shadow-md">🎙️</div>
                     <div>
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center text-white text-2xl shadow-md">🎙️</div>
-                            <div>
-                                <h3 class="text-xl font-bold font-title leading-none">Podcast Roots</h3>
-                                <p class="text-accent font-bold text-[10px] mt-1 uppercase tracking-widest">Audio / 05:30 MIN</p>
-                            </div>
-                        </div>
-                        <p class="text-sm text-stone-600 mb-6 leading-relaxed">Una inmersión sonora en las historias detrás de la música.</p>
+                        <h3 class="text-xl font-bold font-title leading-none">Podcast Roots</h3>
+                        <p class="text-accent font-bold text-[10px] uppercase tracking-widest">Podcast</p>
                     </div>
-                    
-                    <audio id="podcast-audio" preload="metadata">
-                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                    </audio>
-
-                    <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-sm">
-                        <div class="flex items-center gap-4 mb-3">
-                            <button id="play-pause" class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm transition hover:bg-red-800">▶</button>
-                            <input type="range" id="seek-slider" class="flex-1 h-1 bg-stone-200 rounded-full appearance-none" value="0">
-                        </div>
-                        <div class="flex justify-between text-[10px] font-bold text-stone-500">
-                            <span id="current-time">00:00</span>
-                            <span id="duration">--:--</span>
-                        </div>
-                    </div>
+                </div>
+                <div class="bg-black p-2 rounded-xl border border-stone-200 shadow-sm overflow-hidden aspect-video">
+                    <video class="w-full h-full rounded-lg" controls>
+                        <source src="videos/A2.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Recurso Interactivo -->
     <section id="interactivo" class="py-24 bg-stone-900 text-white px-6">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold font-title mb-4 text-accent">ADN MUSICAL</h2>
-                <p class="text-stone-400 max-w-xl mx-auto font-medium">Compara la estructura genética musical entre diferentes géneros y culturas.</p>
+                <p class="text-stone-400 font-medium">Compara la estructura genética musical de diferentes naciones.</p>
             </div>
-
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-4 space-y-6">
                     <div class="p-6 bg-white/10 rounded-2xl border border-white/20">
-                        <h4 class="text-accent font-bold text-xs uppercase mb-4 tracking-widest">Seleccionar Perfil</h4>
-                        <div class="space-y-3">
-                            <button onclick="updateRadar('genero1')" id="btn-genero1" class="w-full py-3 px-6 bg-accent text-white rounded-xl text-left font-bold text-sm transition-all uppercase tracking-widest shadow-md">Género A (Raíz)</button>
-                            <button onclick="updateRadar('genero2')" id="btn-genero2" class="w-full py-3 px-6 bg-stone-800 text-stone-400 rounded-xl text-left font-bold text-sm transition-all hover:text-white hover:bg-stone-700 uppercase tracking-widest">Género B (Fusión)</button>
-                        </div>
+                        <h4 class="text-accent font-bold text-xs uppercase mb-4 tracking-widest">Seleccionar País</h4>
+                        <select id="country-selector" onchange="updateRadar(this.value)" class="w-full py-3 px-4 bg-stone-800 text-white rounded-xl outline-none focus:ring-2 focus:ring-accent cursor-pointer">
+                            <option value="japón">🇯🇵 Japón</option>
+                            <option value="alemania">🇩🇪 Alemania</option>
+                            <option value="eeuu">🇺🇸 Estados Unidos</option>
+                            <option value="españa">🇪🇸 España</option>
+                            <option value="brasil">🇧🇷 Brasil</option>
+                            <option value="francia">🇫🇷 Francia</option>
+                            <option value="corea">🇰🇷 Corea del Sur</option>
+                            <option value="italia">🇮🇹 Italia</option>
+                            <option value="suecia">🇸🇪 Suecia</option>
+                            <option value="india">🇮🇳 India</option>
+                            <option value="méxico">🇲🇽 México</option>
+                            <option value="chile">🇨🇱 Chile</option>
+                        </select>
                     </div>
                     <div class="p-6 bg-accent/20 border border-accent/30 rounded-2xl">
-                        <p id="insight-text" class="text-sm text-white leading-relaxed font-medium">"Perfil con fuerte arraigo en el RITMO y la IDENTIDAD cultural."</p>
+                        <p id="insight-text" class="text-sm text-white italic font-medium">"Perfección técnica y preservación histórica milenaria."</p>
                     </div>
                 </div>
-                <div class="lg:col-span-8 p-8 bg-white/5 rounded-3xl flex justify-center items-center h-[500px] border border-white/10 shadow-inner">
+                <div class="lg:col-span-8 p-8 bg-white/5 rounded-3xl h-[500px] border border-white/10 relative">
                     <div class="chart-container">
                         <canvas id="radarChart"></canvas>
                     </div>
@@ -284,130 +242,97 @@
         </div>
     </section>
 
-    <!-- Transmedia -->
     <section id="transmedia" class="py-24 px-6">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold font-title mb-4 text-accent">UNIVERSO TRANSMEDIA</h2>
-                <p class="text-stone-600 font-medium mt-2">Expansión del relato en otras plataformas.</p>
+                <p class="text-stone-600 font-medium">Expansión del relato en otras plataformas.</p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <!-- Pieza 1 -->
-                <a href="https://instagram.com/@test" target="_blank" class="card-modern aspect-square flex flex-col items-center justify-center p-4 group text-center">
-                    <span class="text-4xl mb-4 text-accent group-hover:scale-110 transition">📸</span>
-                    <span class="text-xs font-bold uppercase text-stone-700 group-hover:text-accent transition">Pieza 1 IG</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <a href="#" class="card-modern aspect-square flex flex-col items-center justify-center p-4 group">
+                    <span class="text-4xl mb-4 group-hover:scale-110 transition">📸</span>
+                    <span class="text-xs font-bold uppercase">Instagram</span>
                 </a>
-                <!-- Pieza 2 -->
-                <a href="https://tiktok.com/@test" target="_blank" class="card-modern aspect-square flex flex-col items-center justify-center p-4 group text-center">
-                    <span class="text-4xl mb-4 text-accent group-hover:scale-110 transition">🎥</span>
-                    <span class="text-xs font-bold uppercase text-stone-700 group-hover:text-accent transition">Pieza 2 TikTok</span>
+                <a href="#" class="card-modern aspect-square flex flex-col items-center justify-center p-4 group">
+                    <span class="text-4xl mb-4 group-hover:scale-110 transition">🎥</span>
+                    <span class="text-xs font-bold uppercase">TikTok</span>
                 </a>
-                <!-- Piezas Restantes (Mockup) -->
-                <div class="card-modern aspect-square flex flex-col items-center justify-center p-4 border-dashed opacity-60">
-                    <span class="text-xs font-bold uppercase text-stone-500">Pieza 3</span>
+                <div class="card-modern aspect-square flex flex-col items-center justify-center opacity-40 border-dashed">
+                    <span class="text-xs font-bold uppercase">Próximamente</span>
                 </div>
-                <div class="card-modern aspect-square flex flex-col items-center justify-center p-4 border-dashed opacity-60">
-                    <span class="text-xs font-bold uppercase text-stone-500">Pieza 4</span>
-                </div>
-                <div class="card-modern aspect-square flex flex-col items-center justify-center p-4 border-dashed opacity-40">
-                    <span class="text-xs font-bold uppercase text-stone-500">Pieza 5</span>
-                </div>
-                <div class="card-modern aspect-square flex flex-col items-center justify-center p-4 border-dashed opacity-40">
-                    <span class="text-xs font-bold uppercase text-stone-500">Pieza 6</span>
-                </div>
-                <div class="card-modern aspect-square flex flex-col items-center justify-center p-4 border-dashed opacity-40">
-                    <span class="text-xs font-bold uppercase text-stone-500">Pieza 7</span>
-                </div>
-                <!-- Mecánica UGC -->
-                <div class="card-modern aspect-square flex flex-col items-center justify-center p-4 bg-accent text-white cursor-pointer hover:bg-red-800 transition">
+                <div class="card-modern aspect-square flex flex-col items-center justify-center bg-accent text-white cursor-pointer hover:bg-red-800">
                     <span class="text-4xl mb-4">🗳️</span>
-                    <span class="text-xs font-bold uppercase">Mecánica UGC</span>
+                    <span class="text-xs font-bold uppercase">UGC Votación</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer / Transparencia -->
-    <footer id="memoria" class="bg-white py-16 px-6 border-t border-stone-200">
-        <div class="max-w-4xl mx-auto">
-            <h4 class="text-accent font-title text-2xl mb-6">TRANSPARENCIA</h4>
-            <div class="grid md:grid-cols-2 gap-10 text-xs font-bold uppercase leading-relaxed text-stone-500">
-                <div>
-                    <strong class="text-accent block mb-2">Uso de IA:</strong>
-                    <p> Uso de IA en pruebas para futuras creaciones.<p>
-                </div>
-                <div>
-                    <strong class="text-accent block mb-2">Fuentes:</strong>
-                    <p>Investigaciones culturales, archivos musicales históricos y entrevistas de campo.</p>
-                </div>
-            </div>
-            <div class="mt-12 text-center text-[10px] font-black text-stone-400 tracking-[0.3em]">
-                ROOTS PROJECT 2026 
+    <footer class="bg-white py-16 px-6 border-t border-stone-200">
+        <div class="max-w-4xl mx-auto text-center">
+            <h4 class="text-accent font-title text-2xl mb-6">ROOTS PROJECT 2026</h4>
+            <div class="grid md:grid-cols-2 gap-10 text-xs font-bold uppercase text-stone-500">
+                <p><span class="text-accent block">Uso de IA:</span> Uso de IA en pruebas para futuras creaciones.</p>
+                <p><span class="text-accent block">Fuentes:</span> Archivos históricos y entrevistas.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // NAVEGACIÓN
+        // Navegación Scroll
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) nav.classList.add('nav-scrolled');
             else nav.classList.remove('nav-scrolled');
         });
 
-        // REPRODUCTOR DE AUDIO
-        const audio = document.getElementById('podcast-audio');
-        const playBtn = document.getElementById('play-pause');
-        const slider = document.getElementById('seek-slider');
-        const currentTime = document.getElementById('current-time');
-        const durationText = document.getElementById('duration');
+        // Configuración Radar Chart
+        const stats = {
+            japón: [80, 100, 100, 100, 100],
+            alemania: [60, 100, 80, 80, 100],
+            eeuu: [100, 60, 80, 80, 100],
+            españa: [60, 100, 100, 100, 80],
+            brasil: [100, 80, 100, 100, 60],
+            francia: [60, 100, 100, 100, 80],
+            corea: [80, 80, 80, 100, 100],
+            italia: [60, 100, 100, 100, 60],
+            suecia: [40, 80, 80, 60, 100],
+            india: [100, 100, 100, 100, 80],
+            méxico: [80, 100, 100, 100, 60],
+            chile: [60, 80, 80, 80, 80]
+        };
 
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) { audio.play(); playBtn.innerText = '⏸'; }
-            else { audio.pause(); playBtn.innerText = '▶'; }
-        });
+        const insights = {
+            japón: "Perfección técnica y preservación histórica milenaria.",
+            alemania: "Ingeniería sonora y un legado clásico estructural.",
+            eeuu: "Innovación rítmica y dominio de la industria tecnológica.",
+            españa: "Fuerte identidad folclórica y arraigo cultural.",
+            brasil: "El corazón del ritmo y la identidad sonora.",
+            francia: "Elegancia histórica y preservación del arte musical.",
+            corea: "Liderazgo tecnológico con una identidad moderna pujante.",
+            italia: "Tradición lírica y una historia cultural inabarcable.",
+            suecia: "Vanguardia en producción y desarrollo digital.",
+            india: "Complejidad rítmica ligada a la espiritualidad.",
+            méxico: "Riqueza cultural vibrante con ritmos de raíz.",
+            chile: "Fusión de identidad andina y modernidad sonora."
+        };
 
-        audio.addEventListener('loadedmetadata', () => {
-            durationText.innerText = formatTime(audio.duration);
-            slider.max = Math.floor(audio.duration);
-        });
-
-        audio.addEventListener('timeupdate', () => {
-            slider.value = Math.floor(audio.currentTime);
-            currentTime.innerText = formatTime(audio.currentTime);
-        });
-
-        slider.addEventListener('input', () => audio.currentTime = slider.value);
-
-        function formatTime(s) {
-            let m = Math.floor(s / 60);
-            let sec = Math.floor(s % 60);
-            return `${m}:${sec < 10 ? '0'+sec : sec}`;
-        }
-
-        // RADAR CHART
         let radar;
         const ctx = document.getElementById('radarChart').getContext('2d');
-        const stats = {
-            genero1: [90, 70, 85, 40, 95],
-            genero2: [60, 90, 40, 85, 70]
-        };
 
         function initChart() {
             radar = new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['RITMO', 'HISTORIA', 'CULTURA', 'TECNOLOGÍA', 'IDENTIDAD'],
+                    labels: ['RITMO', 'HISTORIA', 'CULTURA', 'IDENTIDAD', 'TECNOLOGÍA'],
                     datasets: [{
-                        label: 'Perfil Musical',
-                        data: stats.genero1,
-                        backgroundColor: 'rgba(160, 26, 26, 0.3)',
+                        data: stats['japón'],
+                        backgroundColor: 'rgba(160, 26, 26, 0.4)',
                         borderColor: '#A01A1A',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#A01A1A',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#A01A1A'
+                        borderWidth: 3,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#A01A1A',
+                        pointRadius: 4
                     }]
                 },
                 options: {
@@ -415,10 +340,10 @@
                     maintainAspectRatio: false,
                     scales: {
                         r: {
-                            angleLines: { color: 'rgba(255,255,255,0.1)' },
-                            grid: { color: 'rgba(255,255,255,0.1)' },
-                            pointLabels: { color: '#aaa', font: { size: 11, weight: 'bold' } },
-                            ticks: { display: false, stepSize: 20 },
+                            angleLines: { color: 'rgba(255,255,255,0.2)' },
+                            grid: { color: 'rgba(255,255,255,0.2)' },
+                            pointLabels: { color: '#fff', font: { size: 12, weight: 'bold' } },
+                            ticks: { display: false },
                             suggestedMin: 0, suggestedMax: 100
                         }
                     },
@@ -427,16 +352,14 @@
             });
         }
 
-        function updateRadar(c) {
-            radar.data.datasets[0].data = stats[c];
+        function updateRadar(country) {
+            radar.data.datasets[0].data = stats[country];
             radar.update();
-            document.getElementById('insight-text').innerText = c === 'genero1' ? '"Perfil con fuerte arraigo en el RITMO y la IDENTIDAD cultural."' : '"Perfil moderno con enfoque en HISTORIA y TECNOLOGÍA."';
-            
-            document.getElementById('btn-genero1').className = c === 'genero1' ? 'w-full py-3 px-6 bg-accent text-white rounded-xl text-left font-bold text-sm transition-all uppercase tracking-widest shadow-md' : 'w-full py-3 px-6 bg-stone-800 text-stone-400 rounded-xl text-left font-bold text-sm transition-all hover:text-white hover:bg-stone-700 uppercase tracking-widest';
-            document.getElementById('btn-genero2').className = c === 'genero2' ? 'w-full py-3 px-6 bg-accent text-white rounded-xl text-left font-bold text-sm transition-all uppercase tracking-widest shadow-md' : 'w-full py-3 px-6 bg-stone-800 text-stone-400 rounded-xl text-left font-bold text-sm transition-all hover:text-white hover:bg-stone-700 uppercase tracking-widest';
+            document.getElementById('insight-text').innerText = `"${insights[country]}"`;
         }
 
         window.onload = initChart;
     </script>
 </body>
+
 </html>
